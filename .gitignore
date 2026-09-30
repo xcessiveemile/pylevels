@@ -1,0 +1,28 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.DS_Store
+
+# your own save and backups of it
+progress.json
+progress.*.json
+
+# your own music (only the README is shared)
+music/*
+!music/README.txt
+
+# built on each computer by setup.sh
+PyLevels.app/Contents/MacOS/pylevels-bin
+
+# originals of the re-encoded videos
+media-originals/
+
+# personal notes and older versions, kept on this computer only
+DEPLOY.md
+THEORY.before-rewrite.md
+THEORY.v2.md
+PyLevels.app/Contents/Resources/PyLevels.old.icns
+web-game/.vercel/
+node_modules/
+.vercel/
+.env*

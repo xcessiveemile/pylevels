@@ -1,0 +1,32 @@
+#!/bin/bash
+# PyLevels desktop app: opens the game in its own window, fully offline.
+# The first start sets things up (setup.sh). What happens is written to
+# ~/Library/Logs/PyLevels.log. Closing the window quits.
+APP="$(cd "$(dirname "$0")/../../.." && pwd)"
+LOG="$HOME/Library/Logs/PyLevels.log"
+mkdir -p "$HOME/Library/Logs"
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
+problem() {
+  osascript -e "display dialog \"$1\" with title \"PyLevels\" buttons {\"OK\"} default button 1 with icon caution" >/dev/null 2>&1
+  exit 1
+}
+
+# A downloaded app that macOS has not cleared yet runs from a locked copy,
+# away from the rest of the folder.
+case "$APP" in
+  */AppTranslocation/*) problem "macOS opened PyLevels from a locked copy, so it cannot find its files. Open Terminal and run:\n\nxattr -dr com.apple.quarantine <the PyLevels folder>\n\nthen open PyLevels.app again." ;;
+esac
+cd "$APP" || problem "Could not open the PyLevels folder."
+
+if ! .venv/bin/python -c "import webview, textual" >/dev/null 2>&1; then
+  osascript -e 'display notification "first start: setting up, this takes a minute or two" with title "PyLevels"'
+  bash setup.sh >"$LOG" 2>&1 || problem "Setting up failed: $(tail -n 1 "$LOG")\n\nThe full story is in ~/Library/Logs/PyLevels.log"
+fi
+
+# The launcher built for this computer shows the window as PyLevels in the Dock.
+BIN="$APP/PyLevels.app/Contents/MacOS/pylevels-bin"
+if [ -x "$BIN" ] && "$BIN" --check >/dev/null 2>&1; then
+  exec "$BIN" >>"$LOG" 2>&1
+fi
+.venv/bin/python desktop.py >>"$LOG" 2>&1 || problem "PyLevels stopped with an error. Details are in ~/Library/Logs/PyLevels.log"

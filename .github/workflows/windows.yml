@@ -1,0 +1,25 @@
+name: Windows check
+
+# Sets PyLevels up on Windows the way PyLevels.bat does, runs the tests,
+# and opens the app window once to check the game loads.
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Set up like PyLevels.bat
+        shell: cmd
+        run: call windows\setup.bat
+      - name: Tests
+        shell: cmd
+        run: .venv\Scripts\python.exe -m pytest -q
+      - name: Open the app window
+        shell: cmd
+        run: .venv\Scripts\python.exe tests\app_smoke.py
