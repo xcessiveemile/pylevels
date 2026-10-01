@@ -1,8 +1,14 @@
 """Tests the sign-in against a stand-in for the claude command."""
 
+import sys
+
 import pytest
 
 import auth
+
+# The terminal game's sign-in reads the claude command through pipes with
+# select(), which Windows does not allow; the desktop app signs in another way.
+pytestmark = pytest.mark.skipif(sys.platform == "win32", reason="the terminal sign-in is Mac and Linux only")
 from tests.fake_claude import LINK, build
 
 
