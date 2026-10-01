@@ -14,47 +14,19 @@ time, with underwater (and outer space) scenery behind it.
 You pass a level when your program prints exactly what the level expects.
 Python runs inside the app, so nothing on your computer is touched.
 
-## Get it running (Mac)
+## Install
 
-You need macOS 12 or newer and Python 3.9 or newer. Most Macs already have
-Python 3; if not, get it from [python.org](https://www.python.org/downloads/).
+**Step-by-step instructions for Mac and Windows: [INSTALL.md](INSTALL.md)**
 
-```bash
-git clone https://github.com/<you>/pylevels.git
-open pylevels/PyLevels.app
-```
+The short version:
 
-The first start sets everything up by itself, which takes a minute or two
-(you'll see a notification). After that the app opens straight away, fully
-offline. Closing the window quits.
+- **Mac** (macOS 12+, Python 3.9+): `git clone https://github.com/xcessiveemile/pylevels.git`,
+  then open **PyLevels.app** in the folder.
+- **Windows** (10 or 11, Python 3.9 to 3.13 from python.org): download the
+  ZIP, unzip it, double-click **PyLevels.bat**.
 
-If you downloaded the ZIP instead of cloning, macOS locks apps from the
-internet. Unlock the folder once in Terminal, then open the app:
-
-```bash
-xattr -dr com.apple.quarantine ~/Downloads/pylevels-main
-```
-
-If macOS still says it can't check the app, right-click PyLevels.app, choose
-**Open**, then **Open** again. If something goes wrong, the details are in
-`~/Library/Logs/PyLevels.log`.
-
-Prefer the terminal? `bash setup.sh`, then `.venv/bin/python desktop.py`.
-
-## Get it running (Windows)
-
-You need Windows 10 or 11 and Python 3.9 to 3.13 from
-[python.org](https://www.python.org/downloads/) (tick **Add python.exe to
-PATH** while installing).
-
-1. Download this project (**Code → Download ZIP**) and unzip it, or `git clone` it.
-2. Double-click **PyLevels.bat**.
-
-The first start sets everything up, which takes a minute or two, and adds a
-**PyLevels** shortcut to the Start menu and your desktop. From then on, use
-that shortcut. If Windows SmartScreen warns about the file, click **More info →
-Run anyway**. If something goes wrong, the details are in
-`%LOCALAPPDATA%\PyLevels\PyLevels.log`.
+The first start sets everything up by itself (a minute or two). After that
+the app opens straight away and works offline.
 
 ## The tutor: pick one in settings
 
